@@ -1,0 +1,9 @@
+{
+  "taskpoint": [
+    {
+      "descricao": "Revisar React Native",
+      "id": "s-fg8YHpHgw"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
