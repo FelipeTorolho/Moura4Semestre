@@ -1,0 +1,13 @@
+{
+  "taskpoint": [
+    {
+      "descricao": "Estudar HTML e CSS",
+      "id": "YeDfinXmqPM"
+    },
+    {
+      "descricao": "Estudar JavaScript",
+      "id": "xwL3fn89now"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

@@ -21,8 +21,8 @@ export const TaskItemStyle = StyleSheet.create({
         gap: 12,
     },
     iconButton: {
-        width: 28,
-        height: 28,
+        width: 24,
+        height: 24,
         alignItems: 'center',
         justifyContent: 'center',
         borderWidth: 1,
@@ -30,12 +30,16 @@ export const TaskItemStyle = StyleSheet.create({
         borderRadius: 6,
     },
     iconButtonTrash: {
-        width: 28,
-        height: 28,
+        width: 24,
+        height: 24,
         alignItems: 'center',
         justifyContent: 'center',
         borderWidth: 1,
         borderColor: '#D46E75',
         borderRadius: 6,
+    },
+    iconImage: {
+        width: 16,
+        height: 16,
     }
 })

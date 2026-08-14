@@ -1,21 +1,30 @@
 import { Alert, Text, TextInput, TouchableOpacity, View } from "react-native"
 import { FormTaskStyle } from "./FormTaskStyle"
-import { useState } from "react"
+import { useState, useContext } from "react"
+import { TaskContext } from "../../context/TaskContext"
 
 export const FormTask = () => {
-  const [taskValue, setTaskValue] = useState("");
+  // const [taskValue, setTaskValue] = useState("");
+  const { postTask, taskValue, setTaskValue, editMode, setEditMode, setIdToEdit, idToEdit, putTaskConfirm } = useContext(TaskContext);
 
+  const saveTask = async () => {
+    if (taskValue.trim() === "") {
+      Alert.alert("Atenção", "Digite uma tarefa antes de cadastrar.");
+      return;
+    }
 
-  const saveTask = () => {
-    console.log(taskValue)
+    await postTask({ descricao: taskValue });
+
     Alert.alert("Título da janela", `Tarefa: ${taskValue} cadastrada com sucesso`, [
-      // Botão 1
       {
         text: "OK",
-        onPress: () => {}
+        onPress: () => { }
       },
-    ])
+    ]);
+
+    setTaskValue(""); // limpa o input depois de cadastrar
   }
+
   return (
     <View style={FormTaskStyle.formTaskBox}>
       <TextInput
@@ -27,14 +36,46 @@ export const FormTask = () => {
         placeholder="Adicione uma tarefa"
       />
 
-      <TouchableOpacity 
-      style={FormTaskStyle.taskButton} 
-      onPress={() => {
-        saveTask()
-      }}>
+      {/* Salvar */}
+      <TouchableOpacity
+        style={FormTaskStyle.taskButton}
+        onPress={() => {
+          if (editMode) {
+            const salvou = putTaskConfirm({
+              id: idToEdit,
+              descricao: taskValue
+            });
+            if (salvou)
+              Alert.alert("Editar", `${taskValue} foi editado com sucesso`, [{ text: "Ok" }]);
+            else {  
+              Alert.alert("Editar", `Erro ao editar`, [{ text: "Ok" }])
+          }
+        } else {
+            saveTask();
+          }
+        }}
+      >
 
-        <Text style={FormTaskStyle.taskButtonText}>Adicionar</Text>
+      <Text style={FormTaskStyle.taskButtonText}>Salvar</Text>
+    </TouchableOpacity>
+
+
+      {/* Cancelar */ }
+  {
+    editMode && (
+      <TouchableOpacity
+        style={FormTaskStyle.taskButton}
+        onPress={() => {
+          setTaskValue("")//zera o dado do formulário
+          setEditMode(false)//sai do modo de edição
+          setIdToEdit(0)//zera o id que iria editar
+        }}>
+
+        <Text style={FormTaskStyle.taskButtonText}>Cancelar</Text>
       </TouchableOpacity>
-    </View>
+
+    )
+  }
+    </View >
   )
 }

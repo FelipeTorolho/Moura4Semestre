@@ -3,8 +3,8 @@ import{ FooterStyles } from "./FooterStyle"
 
 export const Footer = () => {
   return (
-    <View>
-        <Text>Footer Component</Text>
+    <View style={FooterStyles.footerContainer}>
+        <Text style={FooterStyles.text}>2026, React List - Todos os direitos reservados</Text>
     </View>
   )
 }
